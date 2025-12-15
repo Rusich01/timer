@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import type { InitialStateType } from "./type/type";
 import { calculateTime } from "./function/timer";
+import { initialState } from "./state/InitialState";
 
 const App = () => {
-  const initialState: InitialStateType = {
-    minutes: 0,
-    seconds: 0,
-    milSeconds: 0,
-  };
-
   const [time, setTime] = useState(initialState);
   const [listItem, setListItem] = useState<InitialStateType[]>([]);
   const [startTimer, setStartTimer] = useState(false);
