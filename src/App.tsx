@@ -65,19 +65,27 @@ const App = () => {
             )}
 
             <ul className="space-y-1">
-              {listItem.map((item, index) => (
-                <li
-                  key={`${item.minutes}${item.seconds}${item.milSeconds}`}
-                  className="text-sm text-black bg-gray-100 rounded-lg px-2 py-1"
-                >
-                  <span className="pr-1.5">{index + 1}.</span>
-                  {`${String(item.minutes).padStart(2, "0")}:${String(
-                    item.seconds
-                  ).padStart(2, "0")}:${String(
-                    Math.floor(item.milSeconds / 10)
-                  ).padStart(2, "0")}`}
-                </li>
-              ))}
+              {listItem
+                .sort((a, b) => {
+                  const timeA: number =
+                    a.minutes * 60000 + a.seconds * 1000 + a.milSeconds;
+                  const timeB: number =
+                    b.minutes * 60000 + b.seconds * 1000 + b.milSeconds;
+                  return timeB - timeA;
+                })
+                .map((item, index) => (
+                  <li
+                    key={`${item.minutes}${item.seconds}${item.milSeconds}`}
+                    className="text-sm text-black bg-gray-100 rounded-lg px-2 py-1"
+                  >
+                    <span className="pr-1.5">{index + 1}.</span>
+                    {`${String(item.minutes).padStart(2, "0")}:${String(
+                      item.seconds
+                    ).padStart(2, "0")}:${String(
+                      Math.floor(item.milSeconds / 10)
+                    ).padStart(2, "0")}`}
+                  </li>
+                ))}
             </ul>
           </div>
         </div>
