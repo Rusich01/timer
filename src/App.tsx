@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { InitialStateType } from "./type/type";
 import { calculateTime } from "./function/timer";
 import { initialState } from "./state/InitialState";
+import { soundStart, soundStop } from "./song/song";
 
 const App = () => {
   const [time, setTime] = useState(initialState);
@@ -34,7 +35,10 @@ const App = () => {
           <div className="flex gap-3 mb-6">
             <button
               disabled={startTimer}
-              onClick={() => setStartTimer(true)}
+              onClick={() => {
+                setStartTimer(true);
+                soundStart.play();
+              }}
               className={`${
                 startTimer
                   ? "flex-1 bg-gray-500 text-white py-2 rounded-xl hover:bg-gray-600 cursor-not-allowed"
@@ -49,6 +53,7 @@ const App = () => {
               onClick={() => {
                 setStartTimer(false);
                 setListItem((pr) => [...pr, time]);
+                soundStop.play();
               }}
               className={`${
                 !startTimer
